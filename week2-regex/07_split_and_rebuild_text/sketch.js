@@ -6,7 +6,7 @@
 
 // Here is where we are working with a regex
 function process(txt) {
-  
+
   // split by any sequence of "non word" characters
   // The parentheses mean that the delimiters will be retained
   var delimiter = /(\W+)/;
@@ -15,7 +15,7 @@ function process(txt) {
   // This is silly, but I'm just replacing
   // five letter words.
   for (var i = 0; i < tokens.length; i++) {
-    // Match any 5 letter words and change the token 
+    // Match any 5 letter words and change the token
     // to something else
     var regex = /^[a-z]{5}$/i;
     if (regex.test(tokens[i])) {
@@ -24,7 +24,7 @@ function process(txt) {
   }
 
   // This is how to make everything back to one big paragraph with join()
-  var output = tokens.join('');  
+  var output = tokens.join('');
   var par1 = createP(output);
   par1.class('text');
 
@@ -80,5 +80,33 @@ function fileLoaded(data) {
 
 // Handle the text input field
 function handleInput() {
-  process(input.value());
+
+  var r = /(\W+)/ ;
+  // r = /\W+/;
+  var textvalue = input.value();
+  var r = /\b(\d{3})-\d{4}\b/g;
+
+  var newstring = textvalue.replace(r,replacer);
+  //console.log(newstring);
+  createP(newstring);
+  // var words = textvalue.split(r);
+  // console.log(words);
+  //
+  // for(var i =0;i<words.length;i++){
+  //   createP(words[i]);
+  // }
+   // process(input.value());
+}
+
+function replacer(match , group1 ,group2){
+   console.log(arguments);
+   //console.log(arguments[0].length +arguments[1].length+arguments[2].length);
+  //  console.log(group1);
+  //  console.log(group2);
+   return match;
+  // if(match.length ==4){
+  //   return match.toUpperCase();
+  // }else{
+  //   return match;
+  // }
 }
